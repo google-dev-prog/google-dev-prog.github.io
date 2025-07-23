@@ -3,15 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Escola Munkicipal Dr. Tertualino Meirelles</title>
+  <title>Escola Municipal Dr. Tertualino Meirelles</title>
   <style>
-    /* Reset */
+    /* Reset básico */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-
     body {
       background: linear-gradient(135deg, #1e1e2f, #111);
       color: #fff;
@@ -22,42 +21,49 @@
       align-items: center;
       text-align: center;
       overflow: hidden;
+      padding: 20px;
     }
-
     .container {
+      width: 320px;
+      background: #22253b;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.7);
       transition: opacity 0.8s ease, transform 0.8s ease;
-      opacity: 1;
-      transform: translateY(0);
     }
-
-    .fade-out {
-      opacity: 0;
-      transform: translateY(-30px);
-      pointer-events: none;
-    }
-
-    .hidden {
-      display: none;
-    }
-
     h1 {
-      font-size: 2.5rem;
+      font-size: 1.8rem;
       font-weight: bold;
+      margin-bottom: 10px;
       text-transform: uppercase;
-      letter-spacing: 2px;
-      animation: fadeInDown 1s ease-in-out;
+      letter-spacing: 1.5px;
+      animation: fadeInDown 1s ease forwards;
     }
-
     p.subtitulo {
-      font-size: 1.2rem;
       color: #ccc;
-      margin-top: 10px;
-      animation: fadeInDown 1.5s ease-in-out;
+      margin-bottom: 25px;
+      font-size: 1rem;
+      animation: fadeInDown 1.2s ease forwards;
     }
-
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px 15px;
+      font-size: 1rem;
+      border: 2px solid #007bff;
+      border-radius: 8px;
+      outline: none;
+      text-align: center;
+      margin-bottom: 20px;
+      transition: border-color 0.3s ease;
+    }
+    input[type="email"]:focus,
+    input[type="password"]:focus {
+      border-color: #3399ff;
+    }
     button {
-      margin-top: 40px;
-      padding: 15px 30px;
+      width: 100%;
+      padding: 15px;
       background: #007bff;
       color: #fff;
       border: none;
@@ -65,118 +71,81 @@
       font-size: 1.2rem;
       font-weight: bold;
       cursor: pointer;
-      transition: all 0.3s ease-in-out;
-      animation: fadeInUp 1.2s ease-in-out;
+      transition: background 0.3s ease, transform 0.3s ease;
     }
-
     button:hover {
       background: #3399ff;
       transform: scale(1.05);
-      box-shadow: 0 4px 15px rgba(0, 123, 255, 0.6);
+      box-shadow: 0 4px 15px rgba(0,123,255,0.6);
     }
-
-    footer {
-      margin-top: 40px;
-      font-size: 0.8rem;
-      color: #aaa;
-      animation: fadeInUp 1.5s ease-in-out;
+    .error-msg {
+      color: #ff4c4c;
+      margin-top: 10px;
+      font-weight: bold;
+      animation: fadeIn 0.5s ease forwards;
+      height: 24px;
     }
-
-    footer p {
-      margin: 5px 0;
+    .hidden {
+      display: none;
     }
-
-    /* Segunda tela (E-mail) */
-    .email-screen {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-
-    .email-screen.active {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    input[type="email"] {
-      margin-top: 20px;
-      padding: 12px 15px;
-      width: 250px;
-      font-size: 1rem;
-      border: 2px solid #007bff;
-      border-radius: 8px;
-      outline: none;
-      text-align: center;
-      transition: border 0.3s ease;
-    }
-
-    input[type="email"]:focus {
-      border: 2px solid #3399ff;
-    }
-
-    /* Animações */
     @keyframes fadeInDown {
-      0% { opacity: 0; transform: translateY(-30px); }
-      100% { opacity: 1; transform: translateY(0); }
+      0% {opacity: 0; transform: translateY(-20px);}
+      100% {opacity: 1; transform: translateY(0);}
     }
-
-    @keyframes fadeInUp {
-      0% { opacity: 0; transform: translateY(30px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Responsividade */
-    @media (max-width: 768px) {
-      h1 { font-size: 2rem; }
-      p.subtitulo { font-size: 1rem; }
-      button { font-size: 1rem; padding: 12px 24px; }
-      input[type="email"] { width: 200px; }
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
     }
   </style>
 </head>
 <body>
-  <!-- Primeira Tela -->
-  <div class="container" id="main-screen">
-    <h1>Escola Municipal Dr. Tertualino Meirelles</h1>
-    <p class="subtitulo">Painel principal da escola</p>
-    <button onclick="showEmailScreen()">Acessar site</button>
-
-    <footer>
-      <p>© 2025 Escola Municipal Dr. Tertualino Meirelles - Todos os direitos reservados.</p>
-      <p>Este site não é afiliado ao Google ou ao GitHub.</p>
-    </footer>
+  <div class="container" id="email-container">
+    <h1>Digite seu E-mail</h1>
+    <input type="email" id="email" placeholder="E-mail" required />
+    <button onclick="checkEmail()">Continuar</button>
+    <div class="error-msg" id="email-error"></div>
   </div>
 
-  <!-- Segunda Tela -->
-  <div class="email-screen hidden" id="email-screen">
-    <h1>Digite seu E-mail</h1>
-    <input type="email" id="email" placeholder="E-mail" />
-    <button onclick="validateEmail()">Continuar</button>
+  <div class="container hidden" id="password-container" style="opacity: 0;">
+    <h1>Digite sua senha.</h1>
+    <input type="password" id="password" placeholder="Senha" required />
+    <button onclick="checkPassword()">Entrar</button>
+    <div class="error-msg" id="password-error"></div>
   </div>
 
   <script>
-    function showEmailScreen() {
-      const main = document.getElementById("main-screen");
-      const emailScreen = document.getElementById("email-screen");
+    function checkEmail() {
+      const emailInput = document.getElementById('email').value.trim();
+      const emailError = document.getElementById('email-error');
+      const passwordContainer = document.getElementById('password-container');
+      const emailContainer = document.getElementById('email-container');
 
-      // Anima a tela inicial sumindo
-      main.classList.add("fade-out");
-      setTimeout(() => {
-        main.classList.add("hidden");
-        emailScreen.classList.remove("hidden");
-        emailScreen.classList.add("active");
-      }, 800);
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+
+      if(emailPattern.test(emailInput)){
+        emailError.textContent = '';
+        // Esconde o email e mostra o password com animação
+        emailContainer.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        emailContainer.style.opacity = '0';
+        emailContainer.style.transform = 'translateY(-20px)';
+        setTimeout(() => {
+          emailContainer.classList.add('hidden');
+          passwordContainer.classList.remove('hidden');
+          passwordContainer.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+          passwordContainer.style.opacity = '1';
+          passwordContainer.style.transform = 'translateY(0)';
+        }, 600);
+      } else {
+        emailError.textContent = 'Digite um e-mail válido!';
+      }
     }
 
-    function validateEmail() {
-      const emailInput = document.getElementById("email").value;
-      const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+    function checkPassword() {
+      const passwordInput = document.getElementById('password').value.trim();
+      const passwordError = document.getElementById('password-error');
 
-      if (emailPattern.test(emailInput)) {
-        alert("E-mail válido! (Por enquanto não faz nada)");
-      } else {
-        alert("Digite um e-mail válido!");
-      }
+      // Exibe sempre "Senha inválida!"
+      passwordError.textContent = 'Senha inválida!';
     }
   </script>
 </body>
