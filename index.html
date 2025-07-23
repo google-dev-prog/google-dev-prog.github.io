@@ -5,63 +5,107 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Escola Municipal Dr. Tertualino Meirelles</title>
   <style>
-    /* Reset básico */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; }
     body {
       background: linear-gradient(135deg, #1e1e2f, #111);
       color: #fff;
       font-family: "Poppins", sans-serif;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+
+    .fade-transition {
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .fade-out-up { opacity: 0 !important; transform: translateY(-30px) !important; pointer-events: none !important; }
+    .hidden { display: none !important; }
+
+    /* Landing */
+    .landing-screen {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 40px 20px;
+    }
+    .landing-screen h1 {
+      font-size: 2.5rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      animation: fadeInDown 1s ease-in-out;
+    }
+    .landing-screen .subtitulo {
+      font-size: 1.2rem;
+      color: #ccc;
+      margin-top: 10px;
+      animation: fadeInDown 1.3s ease-in-out;
+    }
+    .landing-screen button {
+      margin-top: 50px;
+      padding: 15px 40px;
+      background: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 40px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+      animation: fadeInUp 1.2s ease-in-out;
+    }
+    .landing-screen button:hover {
+      background: #3399ff;
+      transform: scale(1.05);
+      box-shadow: 0 4px 15px rgba(0, 123, 255, 0.6);
+    }
+    footer {
+      margin-top: 60px;
+      font-size: 0.85rem;
+      color: #aaa;
+      animation: fadeInUp 1.5s ease-in-out;
+    }
+
+    /* Form */
+    .form-wrapper {
+      width: 100%;
       min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
       text-align: center;
-      overflow: hidden;
-      padding: 20px;
     }
-    .container {
+    .form-card {
       width: 320px;
       background: #22253b;
       padding: 30px;
       border-radius: 15px;
       box-shadow: 0 0 20px rgba(0,0,0,0.7);
-      transition: opacity 0.8s ease, transform 0.8s ease;
     }
-    h1 {
-      font-size: 1.8rem;
+    .form-card h1 {
+      font-size: 1.6rem;
       font-weight: bold;
-      margin-bottom: 10px;
+      margin-bottom: 20px;
       text-transform: uppercase;
       letter-spacing: 1.5px;
-      animation: fadeInDown 1s ease forwards;
     }
-    p.subtitulo {
-      color: #ccc;
-      margin-bottom: 25px;
-      font-size: 1rem;
-      animation: fadeInDown 1.2s ease forwards;
-    }
-    input[type="email"],
-    input[type="password"] {
+    .form-card input {
       width: 100%;
-      padding: 12px 15px;
+      padding: 12px;
       font-size: 1rem;
       border: 2px solid #007bff;
       border-radius: 8px;
       outline: none;
       text-align: center;
       margin-bottom: 20px;
-      transition: border-color 0.3s ease;
+      background: #1b1d30;
+      color: #fff;
     }
-    input[type="email"]:focus,
-    input[type="password"]:focus {
-      border-color: #3399ff;
-    }
-    button {
+    .form-card input:focus { border-color: #3399ff; }
+    .form-card button {
       width: 100%;
       padding: 15px;
       background: #007bff;
@@ -73,7 +117,7 @@
       cursor: pointer;
       transition: background 0.3s ease, transform 0.3s ease;
     }
-    button:hover {
+    .form-card button:hover {
       background: #3399ff;
       transform: scale(1.05);
       box-shadow: 0 4px 15px rgba(0,123,255,0.6);
@@ -82,71 +126,76 @@
       color: #ff4c4c;
       margin-top: 10px;
       font-weight: bold;
-      animation: fadeIn 0.5s ease forwards;
       height: 24px;
     }
-    .hidden {
-      display: none;
-    }
-    @keyframes fadeInDown {
-      0% {opacity: 0; transform: translateY(-20px);}
-      100% {opacity: 1; transform: translateY(0);}
-    }
-    @keyframes fadeIn {
-      from {opacity: 0;}
-      to {opacity: 1;}
-    }
+
+    @keyframes fadeInDown { 0% {opacity:0; transform:translateY(-20px);} 100%{opacity:1; transform:translateY(0);} }
+    @keyframes fadeInUp { 0% {opacity:0; transform:translateY(20px);} 100%{opacity:1; transform:translateY(0);} }
   </style>
 </head>
 <body>
-  <div class="container" id="email-container">
-    <h1>Digite seu E-mail</h1>
-    <input type="email" id="email" placeholder="E-mail" required />
-    <button onclick="checkEmail()">Continuar</button>
-    <div class="error-msg" id="email-error"></div>
+  <div id="landing-screen" class="landing-screen fade-transition">
+    <h1>Escola Municipal Dr. Tertualino Meirelles</h1>
+    <p class="subtitulo">Painel principal da escola</p>
+    <button id="landing-btn">Acessar painel</button>
+    <footer>
+      <p>© 2025 Escola Municipal Dr. Tertualino Meirelles - Todos os direitos reservados.</p>
+      <p>Este site não é afiliado ao Google ou ao GitHub.</p>
+    </footer>
   </div>
 
-  <div class="container hidden" id="password-container" style="opacity: 0;">
-    <h1>Digite sua senha.</h1>
-    <input type="password" id="password" placeholder="Senha" required />
-    <button onclick="checkPassword()">Entrar</button>
-    <div class="error-msg" id="password-error"></div>
+  <div id="email-screen" class="form-wrapper hidden fade-transition">
+    <div class="form-card">
+      <h1>Digite seu E-mail</h1>
+      <input type="email" id="email" placeholder="E-mail" required />
+      <button id="email-btn">Continuar</button>
+      <div class="error-msg" id="email-error"></div>
+    </div>
+  </div>
+
+  <div id="password-screen" class="form-wrapper hidden fade-transition">
+    <div class="form-card">
+      <h1>Digite sua senha</h1>
+      <input type="password" id="password" placeholder="Insira uma senha" required />
+      <button id="password-btn">Entrar</button>
+      <div class="error-msg" id="password-error"></div>
+    </div>
   </div>
 
   <script>
-    function checkEmail() {
-      const emailInput = document.getElementById('email').value.trim();
-      const emailError = document.getElementById('email-error');
-      const passwordContainer = document.getElementById('password-container');
-      const emailContainer = document.getElementById('email-container');
+    const landingScreen = document.getElementById('landing-screen');
+    const emailScreen = document.getElementById('email-screen');
+    const passwordScreen = document.getElementById('password-screen');
+    const emailInput = document.getElementById('email');
+    const emailError = document.getElementById('email-error');
+    const passwordError = document.getElementById('password-error');
 
-      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+    document.getElementById('landing-btn').onclick = () => {
+      landingScreen.classList.add('fade-out-up');
+      setTimeout(() => {
+        landingScreen.classList.add('hidden');
+        emailScreen.classList.remove('hidden');
+      }, 800);
+    };
 
-      if(emailPattern.test(emailInput)){
+    document.getElementById('email-btn').onclick = () => {
+      const email = emailInput.value.trim();
+      const emailPattern = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]{2,}$/i;
+      if(emailPattern.test(email)) {
         emailError.textContent = '';
-        // Esconde o email e mostra o password com animação
-        emailContainer.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        emailContainer.style.opacity = '0';
-        emailContainer.style.transform = 'translateY(-20px)';
+        emailScreen.classList.add('fade-out-up');
         setTimeout(() => {
-          emailContainer.classList.add('hidden');
-          passwordContainer.classList.remove('hidden');
-          passwordContainer.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-          passwordContainer.style.opacity = '1';
-          passwordContainer.style.transform = 'translateY(0)';
-        }, 600);
+          emailScreen.classList.add('hidden');
+          passwordScreen.classList.remove('hidden');
+        }, 800);
       } else {
         emailError.textContent = 'Digite um e-mail válido!';
       }
-    }
+    };
 
-    function checkPassword() {
-      const passwordInput = document.getElementById('password').value.trim();
-      const passwordError = document.getElementById('password-error');
-
-      // Exibe sempre "Senha inválida!"
+    document.getElementById('password-btn').onclick = () => {
       passwordError.textContent = 'Senha inválida!';
-    }
+    };
   </script>
 </body>
 </html>
