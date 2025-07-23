@@ -24,6 +24,7 @@
       text-align: center;
       overflow: hidden;
       padding: 20px;
+      position: relative;
     }
 
     h1 {
@@ -34,10 +35,17 @@
       animation: fadeInDown 1s ease-in-out;
     }
 
+    p.subtitulo {
+      font-size: 1.2rem;
+      color: #ccc;
+      margin-top: 10px;
+      animation: fadeInDown 1.5s ease-in-out;
+    }
+
     button {
       margin-top: 40px;
       padding: 15px 30px;
-      background: #ff007f;
+      background: #007bff; /* Azul escolar */
       color: #fff;
       border: none;
       border-radius: 30px;
@@ -49,9 +57,22 @@
     }
 
     button:hover {
-      background: #ff3399;
+      background: #3399ff;
       transform: scale(1.05);
-      box-shadow: 0 4px 15px rgba(255, 0, 127, 0.6);
+      box-shadow: 0 4px 15px rgba(0, 123, 255, 0.6);
+    }
+
+    footer {
+      position: absolute;
+      bottom: 15px;
+      font-size: 0.8rem;
+      color: #aaa;
+      text-align: center;
+      animation: fadeInUp 1.5s ease-in-out;
+    }
+
+    footer p {
+      margin: 5px 0;
     }
 
     /* Animações */
@@ -71,6 +92,10 @@
         font-size: 2rem;
       }
 
+      p.subtitulo {
+        font-size: 1rem;
+      }
+
       button {
         font-size: 1rem;
         padding: 12px 24px;
@@ -80,6 +105,12 @@
 </head>
 <body>
   <h1>Escola Municipal Dr. Tertualino Meirelles</h1>
+  <p class="subtitulo">Painel principal da escola</p>
   <button>Acessar site</button>
+
+  <footer>
+    <p>© 2025 Escola Municipal Dr. Tertualino Meirelles - Todos os direitos reservados.</p>
+    <p>Este site não é afiliado ao Google ou ao GitHub.</p>
+  </footer>
 </body>
 </html>
