@@ -180,7 +180,7 @@
 
     document.getElementById('email-btn').onclick = () => {
       const email = emailInput.value.trim();
-      const emailPattern = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]{2,}$/i;
+      const emailPattern = /\S+@\S+\.\S+/;
       if(emailPattern.test(email)) {
         emailError.textContent = '';
         emailScreen.classList.add('fade-out-up');
