@@ -2,23 +2,84 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Site do Lil Nengue</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Escola Municipal Dr. Tertualino Meirelles</title>
   <style>
-    body {
-      background-color: #121212;
-      color: #00ff00;
-      font-family: monospace;
-      text-align: center;
-      padding: 50px;
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
+
+    body {
+      background: linear-gradient(135deg, #1e1e2f, #111);
+      color: #fff;
+      font-family: "Poppins", sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      text-align: center;
+      overflow: hidden;
+      padding: 20px;
+    }
+
     h1 {
-      font-size: 3rem;
+      font-size: 2.5rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      animation: fadeInDown 1s ease-in-out;
+    }
+
+    button {
+      margin-top: 40px;
+      padding: 15px 30px;
+      background: #ff007f;
+      color: #fff;
+      border: none;
+      border-radius: 30px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+      animation: fadeInUp 1.2s ease-in-out;
+    }
+
+    button:hover {
+      background: #ff3399;
+      transform: scale(1.05);
+      box-shadow: 0 4px 15px rgba(255, 0, 127, 0.6);
+    }
+
+    /* Animações */
+    @keyframes fadeInDown {
+      0% { opacity: 0; transform: translateY(-30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Responsividade */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      button {
+        font-size: 1rem;
+        padding: 12px 24px;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>Salve, nego!</h1>
-  <p>Meu site tá no ar pelo GitHub Pages.</p>
+  <h1>Escola Municipal Dr. Tertualino Meirelles</h1>
+  <button>Acessar site</button>
 </body>
 </html>
